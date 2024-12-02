@@ -17,7 +17,7 @@ namespace AOC_Main
 
 			Console.WriteLine($"DISTANCE : {locations1.DistanceToList(locations2)}" + "\r\n");
 
-			Console.WriteLine("/////////// 02 ///////////");
+			Console.WriteLine("/////////// 01 - 2 ///////////");
 
 			Console.WriteLine($"SIMILARITY = {locations1.SimilarityToList(locations2)}");
 

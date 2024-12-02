@@ -64,7 +64,7 @@ namespace AOC_1
 			return distance;
 		}
 
-		//Jour 2
+		//Jour 1-2
 		public int SimilarityToList(LocationsList list)
 		{
 			int score = 0;
