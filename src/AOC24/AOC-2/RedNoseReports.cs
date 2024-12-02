@@ -49,14 +49,14 @@ namespace AOC_2
 
 			foreach (var report in Reports)
 			{
-				safeReports += Convert.ToInt32(IsReportSafe(report));
+				safeReports += Convert.ToInt32(IsReportSafe(report, report));
 				Console.WriteLine($"DEBUG - {safeReports} \r\n");
 			}
 
 			return safeReports;
 		}
 
-		private bool IsReportSafe(List<int> report)
+		private bool IsReportSafe(List<int> report, List<int> originalReport, int nbPass=0)
 		{
 			int variation = 0;
 
@@ -66,15 +66,36 @@ namespace AOC_2
 
 				if (diff is 0 or > 3 or < -3) 
 				{
-					return false;
+					if (nbPass >= originalReport.Count)
+					{
+						return false;
+					}
+
+					var newReport = new List<int>(originalReport);
+					newReport.RemoveAt(nbPass);
+					return IsReportSafe(newReport, originalReport, nbPass+1);
 				}
 				else if (diff < 0 && variation > 0)
 				{
-					return false;
+					if (nbPass >= originalReport.Count)
+					{
+						return false;
+					}
+
+					var newReport = new List<int>(originalReport);
+					newReport.RemoveAt(nbPass);
+					return IsReportSafe(newReport, originalReport, nbPass + 1);
 				}
 				else if (diff > 0 && variation < 0)
 				{
-					return false;
+					if (nbPass >= originalReport.Count)
+					{
+						return false;
+					}
+
+					var newReport = new List<int>(originalReport);
+					newReport.RemoveAt(nbPass);
+					return IsReportSafe(newReport, originalReport, nbPass + 1);
 				}
 
 				variation = diff;
