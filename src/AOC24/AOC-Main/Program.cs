@@ -1,4 +1,5 @@
 ﻿using AOC_1;
+using AOC_2;
 
 namespace AOC_Main
 {
@@ -20,6 +21,12 @@ namespace AOC_Main
 			Console.WriteLine("/////////// 01 - 2 ///////////");
 
 			Console.WriteLine($"SIMILARITY = {locations1.SimilarityToList(locations2)}");
+
+			Console.WriteLine("/////////// 02 ///////////");
+
+			var reports = new RedNoseReports(Path.Combine(ASSETS_DIR, "02-input.txt"));
+
+			Console.WriteLine($"SAFE REPORTS = {reports.NumberSafeReports()}");
 
 			Console.Read();
 		}
