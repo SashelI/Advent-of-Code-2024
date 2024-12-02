@@ -5,6 +5,8 @@ namespace AOC_1
 	public class LocationsList
 	{
 		public  List<int> Locations;
+
+		//Jour 1
 		public LocationsList(string filePath, int columnToRead)
 		{
 			var lines = File.ReadAllLines(filePath);
@@ -39,6 +41,7 @@ namespace AOC_1
 			return builder.ToString();
 		}
 
+		//Jour 1
 		public int DistanceToList(LocationsList list)
 		{
 			if (list.Locations.Count != Locations.Count) { return -1;}
@@ -59,6 +62,22 @@ namespace AOC_1
 			}
 
 			return distance;
+		}
+
+		//Jour 2
+		public int SimilarityToList(LocationsList list)
+		{
+			int score = 0;
+			foreach (var location in Locations)
+			{
+				if (list.Locations.Contains(location))
+				{
+					var everyOccurence = list.Locations.Where(location2 => location2 == location).ToArray();
+					score += location * everyOccurence.Length;
+				}
+			}
+
+			return score;
 		}
 	}
 }
