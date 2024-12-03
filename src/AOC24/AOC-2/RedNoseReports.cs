@@ -50,7 +50,6 @@ namespace AOC_2
 			foreach (var report in Reports)
 			{
 				safeReports += Convert.ToInt32(IsReportSafe(report, report));
-				Console.WriteLine($"DEBUG - {safeReports} \r\n");
 			}
 
 			return safeReports;

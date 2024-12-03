@@ -1,5 +1,6 @@
 ﻿using AOC_1;
 using AOC_2;
+using AOC_3;
 
 namespace AOC_Main
 {
@@ -27,6 +28,18 @@ namespace AOC_Main
 			var reports = new RedNoseReports(Path.Combine(ASSETS_DIR, "02-input.txt"));
 
 			Console.WriteLine($"SAFE REPORTS = {reports.NumberSafeReports()}");
+
+			Console.WriteLine("/////////// 03 ///////////");
+
+			var mulResult = MemoryDecipher.DecipherFromFile(Path.Combine(ASSETS_DIR, "03-input.txt"));
+
+			Console.WriteLine($"MUL MEMORY RESULT = {mulResult}");
+
+			Console.WriteLine("/////////// 03-2 ///////////");
+
+			var mulResult2 = MemoryDecipher.DecipherFromFileConditional(Path.Combine(ASSETS_DIR, "03-input.txt"));
+
+			Console.WriteLine($"MUL MEMORY RESULT 2 = {mulResult2}");
 
 			Console.Read();
 		}
