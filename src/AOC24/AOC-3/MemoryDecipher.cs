@@ -18,8 +18,6 @@ namespace AOC_3
 
 			foreach (Match match in matches)
 			{
-				Console.WriteLine($"DEBUG - MATCH : {match.Value}");
-
 				Regex numbersReg = new Regex("[0-9]+");
 
 				var numbersString = numbersReg.Matches(match.Value);
@@ -28,8 +26,6 @@ namespace AOC_3
 				var number2 = int.Parse(numbersString[1].Value);
 
 				var mul = number1 * number2;
-
-				Console.WriteLine($"DEBUG - MUL : {mul}");
 
 				result += mul;
 			}
@@ -62,8 +58,6 @@ namespace AOC_3
 
 			foreach (Match match in matches)
 			{
-				Console.WriteLine($"DEBUG - MATCH : {match.Value}");
-
 				Regex numbersReg = new Regex("[0-9]+");
 
 				var numbersString = numbersReg.Matches(match.Value);
@@ -72,8 +66,6 @@ namespace AOC_3
 				var number2 = int.Parse(numbersString[1].Value);
 
 				var mul = number1 * number2;
-
-				Console.WriteLine($"DEBUG - MUL : {mul}");
 
 				result += mul;
 			}
