@@ -1,6 +1,7 @@
 ﻿using AOC_1;
 using AOC_2;
 using AOC_3;
+using AOC_4;
 
 namespace AOC_Main
 {
@@ -10,7 +11,7 @@ namespace AOC_Main
 		static void Main(string[] args)
 		{
 			DateTime start;
-			double timer1=0; double timer2=0; double timer3=0;
+			double timer=0;
 
 			Console.WriteLine("/////////// 01 /////////// \r\n");
 
@@ -27,8 +28,8 @@ namespace AOC_Main
 
 			Console.WriteLine($"SIMILARITY = {locations1.SimilarityToList(locations2)}");
 
-			timer1 = (DateTime.Now - start).TotalMilliseconds;
-			Console.WriteLine($"Time : {timer1}" + "\r\n");
+			timer = (DateTime.Now - start).TotalMilliseconds;
+			Console.WriteLine($"Time : {timer}" + "\r\n");
 
 			Console.WriteLine("/////////// 02 ///////////");
 
@@ -37,8 +38,8 @@ namespace AOC_Main
 
 			Console.WriteLine($"SAFE REPORTS = {reports.NumberSafeReports()}");
 
-			timer2 = (DateTime.Now - start).TotalMilliseconds;
-			Console.WriteLine($"Time : {timer2}" + "\r\n");
+			timer = (DateTime.Now - start).TotalMilliseconds;
+			Console.WriteLine($"Time : {timer}" + "\r\n");
 
 			Console.WriteLine("/////////// 03 ///////////");
 
@@ -51,10 +52,21 @@ namespace AOC_Main
 
 			var mulResult2 = MemoryDecipher.DecipherFromFileConditional(Path.Combine(ASSETS_DIR, "03-input.txt"));
 
-			timer3 = (DateTime.Now - start).TotalMilliseconds;
+			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"MUL MEMORY RESULT 2 = {mulResult2}");
-			Console.WriteLine($"Time : {timer3}" + "\r\n");
+			Console.WriteLine($"Time : {timer}" + "\r\n");
+
+			Console.WriteLine("/////////// 04 ///////////");
+
+			var gridSearch = new WordSearchGrid(Path.Combine(ASSETS_DIR, "04-input.txt"));
+
+			start = DateTime.Now;
+			int xmasCount = gridSearch.FindOccurences("XMAS", "SAMX");
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"GRID XMAS COUNT = {xmasCount}");
+			Console.WriteLine($"Time : {timer}" + "\r\n");
 
 			Console.Read();
 		}
