@@ -108,5 +108,64 @@ namespace AOC_4
 
 			return count;
 		}
+
+		//Part 2
+		public int FindXOccurences(string word, string reverseWord)
+		{
+			int count = 0;
+			int rows = _grid.Count;
+
+			for (int i = 0; i <= rows - word.Length; i++)
+			{
+				for (int j = 0; j <= _lineLength - word.Length; j++)
+				{
+					bool match = !word.Where((t, k) => _gridMatrix[i + k][j + k] != t).Any();
+
+					if (match)
+					{
+						match = !word.Where((t, k) => _gridMatrix[i + k][j + 2 - k] != t).Any();
+
+						if (match)
+						{
+							count++;
+						}
+						else
+						{
+							match = !reverseWord.Where((t, k) => _gridMatrix[i + k][j + 2 - k] != t).Any();
+
+							if (match)
+							{
+								count++;
+							}
+						}
+					}
+					else //Reversed
+					{
+						match = !reverseWord.Where((t, k) => _gridMatrix[i + k][j + k] != t).Any();
+
+						if (match)
+						{
+							match = !word.Where((t, k) => _gridMatrix[i + k][j + 2 - k] != t).Any();
+
+							if (match)
+							{
+								count++;
+							}
+							else
+							{
+								match = !reverseWord.Where((t, k) => _gridMatrix[i + k][j + 2 - k] != t).Any();
+
+								if (match)
+								{
+									count++;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			return count;
+		}
 	}
 }

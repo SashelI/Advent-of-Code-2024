@@ -68,6 +68,15 @@ namespace AOC_Main
 			Console.WriteLine($"GRID XMAS COUNT = {xmasCount}");
 			Console.WriteLine($"Time : {timer}" + "\r\n");
 
+			Console.WriteLine("/////////// 04 - 2 ///////////");
+
+			start = DateTime.Now;
+			int x_masCount = gridSearch.FindXOccurences("MAS", "SAM");
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"GRID X-MAS COUNT = {x_masCount}");
+			Console.WriteLine($"Time : {timer}" + "\r\n");
+
 			Console.Read();
 		}
 	}
