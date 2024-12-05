@@ -90,6 +90,15 @@ namespace AOC_Main
 			Console.WriteLine($"MIDDLE SUM FOR GOOD UPDATES : {goodUpdatesSum}");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
+			Console.WriteLine("/////////// 05 - 2 ///////////");
+
+			start = DateTime.Now;
+			var badUpdatesSum = graph.SumOfIncorrectOrders(udpates);
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"MIDDLE SUM FOR BAD UPDATES : {badUpdatesSum}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
+
 			Console.Read();
 		}
 	}

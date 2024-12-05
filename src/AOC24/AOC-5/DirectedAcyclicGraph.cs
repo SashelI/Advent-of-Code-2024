@@ -1,12 +1,41 @@
 ﻿using System.Data;
-using System.Diagnostics.Metrics;
-using System.Reflection;
-using System.Text;
 
 namespace AOC_5
 {
 	public class DirectedAcyclicGraph
 	{
+		internal class RulesComparer : IComparer<int>
+		{
+			private readonly IEnumerable<Tuple<int,int>> _rules;
+
+			public RulesComparer(IEnumerable<Tuple<int, int>> rules)
+			{
+				_rules = rules;
+			}
+
+			public int Compare(int first, int second)
+			{
+				if (first == second)
+				{
+					return 0;
+				}
+				foreach (var rule in _rules)
+				{
+					if (rule.Item2 == first && rule.Item1 == second)
+					{
+						return 1;
+
+					}
+					if (rule.Item2 == second && rule.Item1 == first)
+					{
+						return -1;
+					}
+
+				}
+				return 0;
+			}
+		}
+
 		private Dictionary<int, List<Tuple<int,int>>> _rules = new();
 
 		public DirectedAcyclicGraph(string filePath)
@@ -43,19 +72,44 @@ namespace AOC_5
 			}
 		}
 
+		public int SumOfIncorrectOrders(Updates updates)
+		{
+			var sum = 0;
+
+			foreach (var update in updates.UpdatesList)
+			{
+				if (!IsCorrectOrder(update))
+				{
+					HashSet<Tuple<int,int>> allRules = [];
+
+					foreach (var page in update)
+					{
+						foreach (var rule in _rules[page])
+						{
+							allRules.Add(rule);
+						}
+					}
+
+					RulesComparer rulesComparer = new(allRules);
+					update.Sort(rulesComparer);
+
+					sum += Updates.GetMiddleNumber(update);
+				}
+			}
+
+			return sum;
+		}
+
 		public int SumOfCorrectOrders(Updates updates)
 		{
 			var sum = 0;
-			int i = 0;
 
 			foreach (var update in updates.UpdatesList)
 			{
 				if (IsCorrectOrder(update))
 				{
-					var middle = Updates.GetMiddleNumber(update);
-					sum += middle;
+					sum += Updates.GetMiddleNumber(update);
 				}
-				i++;
 			}
 
 			return sum;
