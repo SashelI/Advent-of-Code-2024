@@ -2,6 +2,7 @@
 using AOC_2;
 using AOC_3;
 using AOC_4;
+using AOC_5;
 
 namespace AOC_Main
 {
@@ -29,7 +30,7 @@ namespace AOC_Main
 			Console.WriteLine($"SIMILARITY = {locations1.SimilarityToList(locations2)}");
 
 			timer = (DateTime.Now - start).TotalMilliseconds;
-			Console.WriteLine($"Time : {timer}" + "\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.WriteLine("/////////// 02 ///////////");
 
@@ -39,7 +40,7 @@ namespace AOC_Main
 			Console.WriteLine($"SAFE REPORTS = {reports.NumberSafeReports()}");
 
 			timer = (DateTime.Now - start).TotalMilliseconds;
-			Console.WriteLine($"Time : {timer}" + "\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.WriteLine("/////////// 03 ///////////");
 
@@ -55,7 +56,7 @@ namespace AOC_Main
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"MUL MEMORY RESULT 2 = {mulResult2}");
-			Console.WriteLine($"Time : {timer}" + "\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.WriteLine("/////////// 04 ///////////");
 
@@ -66,7 +67,7 @@ namespace AOC_Main
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"GRID XMAS COUNT = {xmasCount}");
-			Console.WriteLine($"Time : {timer}" + "\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.WriteLine("/////////// 04 - 2 ///////////");
 
@@ -75,7 +76,19 @@ namespace AOC_Main
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"GRID X-MAS COUNT = {x_masCount}");
-			Console.WriteLine($"Time : {timer}" + "\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
+
+			Console.WriteLine("/////////// 05 ///////////");
+
+			var udpates = new Updates(Path.Combine(ASSETS_DIR, "05-input.txt"));
+
+			start = DateTime.Now;
+			var graph = new DirectedAcyclicGraph(Path.Combine(ASSETS_DIR, "05-input.txt"));
+			var goodUpdatesSum = graph.SumOfCorrectOrders(udpates);
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"MIDDLE SUM FOR GOOD UPDATES : {goodUpdatesSum}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();
 		}

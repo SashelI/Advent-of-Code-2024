@@ -13,6 +13,7 @@
     <ProjectReference Include="..\AOC-2\AOC-2.csproj" />
     <ProjectReference Include="..\AOC-3\AOC-3.csproj" />
     <ProjectReference Include="..\AOC-4\AOC-4.csproj" />
+    <ProjectReference Include="..\AOC-5\AOC-5.csproj" />
   </ItemGroup>
 
 </Project>
