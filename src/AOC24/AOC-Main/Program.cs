@@ -110,14 +110,14 @@ namespace AOC_Main
 			Console.WriteLine($"NUMBER OF STEPS BEFORE OUT : {numberSteps}");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
-			/*Console.WriteLine("/////////// 06 - 2 ///////////");
+			Console.WriteLine("/////////// 06 - 2 ///////////");
 
 			start = DateTime.Now;
-
+			var numberLoops = predictor.ObstaclesOptions();
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
-			Console.WriteLine($" : {}");
-			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
+			Console.WriteLine($"NUMBER OF POSSIBLE OBSTACLES : {numberLoops}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();
 		}

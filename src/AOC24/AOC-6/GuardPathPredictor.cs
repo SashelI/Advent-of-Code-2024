@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AOC_6
 {
@@ -12,6 +13,15 @@ namespace AOC_6
 		private Vector2 _mapSize = Vector2.Zero;
 
 		private int _stepCount = 0;
+
+		//Part 2
+		private Vector2 _originalGuardPosition = Vector2.Zero;
+		private Vector2 _originalGuardDirection = Vector2.Zero;
+		private Dictionary<Vector2, List<Vector2>> _orientationsAtPosition = new ();
+		private bool _isObstacleChecking=false;
+		private Vector2 _currentObstacle=Vector2.Zero;
+
+		private BinaryTree _decisionTree;
 
 		public GuardPathPredictor(string filePath)
 		{
@@ -57,13 +67,10 @@ namespace AOC_6
 				return false;
 			});
 
-			_guardPosition = new Vector2(guardRow, guardCol);
-			_guardDirection = new Vector2(-1, 0); // up
-		}
+			_guardPosition = _originalGuardPosition = new Vector2(guardRow, guardCol);
+			_guardDirection = _originalGuardDirection = new Vector2(-1, 0); // up
 
-		public int StepsBeforeOut()
-		{
-			_stepCount = 0;
+			_orientationsAtPosition[_guardPosition] = [_guardDirection];
 
 			var rootNode = new Node()
 			{
@@ -79,16 +86,53 @@ namespace AOC_6
 				}
 			};
 
-			var decisionTree = new BinaryTree(rootNode);
+			_decisionTree = new BinaryTree(rootNode);
+		}
 
-			while (Step(decisionTree)) { }
+		//Part 2
+		public int ObstaclesOptions()
+		{
+			_stepCount = 0;
+			var obstaclesCount = 0;
+			_isObstacleChecking = true;
+
+			for (int i = 0; i < _mapSize.X; i++)
+			{
+				for (int j = 0; j < _mapSize.Y; j++)
+				{
+					_currentObstacle = new Vector2(i,j);
+
+					_guardPosition = _originalGuardPosition;
+					_guardDirection = _originalGuardDirection;
+					_orientationsAtPosition.Clear();
+
+					while (Step())
+					{
+						if (IsLooping())
+						{
+							obstaclesCount++;
+							break;
+						}
+					}
+				}
+			}
+
+			return obstaclesCount;
+		}
+
+		public int StepsBeforeOut()
+		{
+			_isObstacleChecking = false;
+			_stepCount = 0;
+
+			while (Step()) { }
 
 			return _stepCount;
 		}
 
-		private bool Step(BinaryTree decisionTree)
+		private bool Step()
 		{
-			decisionTree.Evaluate();
+			_decisionTree.Evaluate();
 			return !IsOut();
 		}
 
@@ -98,6 +142,13 @@ namespace AOC_6
 
 			if (IsOffLimits(nextPosition) || _map[(int)nextPosition.X][(int)nextPosition.Y] is 0 or 7)
 			{
+				if (_isObstacleChecking)
+				{
+					if (_currentObstacle == nextPosition)
+					{
+						return false;
+					}
+				}
 				return true;
 			}
 			else
@@ -119,10 +170,29 @@ namespace AOC_6
 
 		private void StepForward()
 		{
-			if (_map[(int)_guardPosition.X][(int)_guardPosition.Y] == 0)
+			if (!_isObstacleChecking)
 			{
-				_map[(int)_guardPosition.X][(int)_guardPosition.Y] = 7;
-				_stepCount += 1;
+				if (_map[(int)_guardPosition.X][(int)_guardPosition.Y] == 0)
+				{
+					_map[(int)_guardPosition.X][(int)_guardPosition.Y] = 7;
+					_stepCount += 1;
+				}
+			}
+
+			else
+			{
+				if (!_orientationsAtPosition.ContainsKey(_guardPosition))
+				{
+					_orientationsAtPosition[_guardPosition] = [_guardDirection];
+					_stepCount += 1;
+				}
+				else
+				{
+					if (!_orientationsAtPosition[_guardPosition].Contains(_guardDirection))
+					{
+						_orientationsAtPosition[_guardPosition].Add(_guardDirection);
+					}
+				}
 			}
 
 			_guardPosition += _guardDirection;
@@ -147,6 +217,20 @@ namespace AOC_6
 				return true;
 			}
 
+			return false;
+		}
+
+		private bool IsLooping()
+		{
+			var nextPosition = _guardPosition + _guardDirection;
+
+			if (_orientationsAtPosition.ContainsKey(nextPosition))
+			{
+				if (_orientationsAtPosition[nextPosition].Contains(_guardDirection))
+				{
+					return true;
+				}
+			}
 			return false;
 		}
 	}
