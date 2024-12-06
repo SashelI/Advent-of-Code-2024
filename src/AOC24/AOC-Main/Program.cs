@@ -3,6 +3,7 @@ using AOC_2;
 using AOC_3;
 using AOC_4;
 using AOC_5;
+using AOC_6;
 
 namespace AOC_Main
 {
@@ -98,6 +99,25 @@ namespace AOC_Main
 
 			Console.WriteLine($"MIDDLE SUM FOR BAD UPDATES : {badUpdatesSum}");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
+
+			Console.WriteLine("/////////// 06 ///////////");
+
+			start = DateTime.Now;
+			var predictor = new GuardPathPredictor(Path.Combine(ASSETS_DIR, "06-input.txt"));
+			var numberSteps = predictor.StepsBeforeOut();
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"NUMBER OF STEPS BEFORE OUT : {numberSteps}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
+
+			/*Console.WriteLine("/////////// 06 - 2 ///////////");
+
+			start = DateTime.Now;
+
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($" : {}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
 
 			Console.Read();
 		}
