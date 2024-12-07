@@ -4,6 +4,7 @@ using AOC_3;
 using AOC_4;
 using AOC_5;
 using AOC_6;
+using AOC_7;
 
 namespace AOC_Main
 {
@@ -112,11 +113,22 @@ namespace AOC_Main
 
 			Console.WriteLine("/////////// 06 - 2 ///////////");
 
-			start = DateTime.Now;
+			/*start = DateTime.Now;
 			var numberLoops = predictor.ObstaclesOptions();
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"NUMBER OF POSSIBLE OBSTACLES : {numberLoops}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
+
+			Console.WriteLine("/////////// 07 ///////////");
+
+			var solver = new EquationSolver(Path.Combine(ASSETS_DIR, "07-input.txt"));
+
+			start = DateTime.Now;
+			var solvableSum = solver.FindOperatorsAndSum();
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"SUM OF TEST VALUES THAT CAN BE FOUND : {solvableSum}");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();
