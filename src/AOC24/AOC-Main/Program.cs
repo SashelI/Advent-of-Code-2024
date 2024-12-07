@@ -113,12 +113,12 @@ namespace AOC_Main
 
 			Console.WriteLine("/////////// 06 - 2 ///////////");
 
-			/*start = DateTime.Now;
+			start = DateTime.Now;
 			var numberLoops = predictor.ObstaclesOptions();
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"NUMBER OF POSSIBLE OBSTACLES : {numberLoops}");
-			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.WriteLine("/////////// 07 ///////////");
 
@@ -129,6 +129,15 @@ namespace AOC_Main
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"SUM OF TEST VALUES THAT CAN BE FOUND : {solvableSum}");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
+
+			Console.WriteLine("/////////// 07 - 2 ///////////");
+
+			start = DateTime.Now;
+			var solvableSum2 = solver.FindOperatorsAndSum(true);
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"SUM OF TEST VALUES THAT CAN BE FOUND : {solvableSum2}");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();

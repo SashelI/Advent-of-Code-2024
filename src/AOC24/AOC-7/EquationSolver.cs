@@ -25,13 +25,13 @@
 			}
 		}
 
-		public double FindOperatorsAndSum()
+		public double FindOperatorsAndSum(bool partTwo=false)
 		{
 			double sum = 0;
 
 			foreach (var equation in _equationsList)
 			{
-				if (IsSolvable(equation))
+				if (IsSolvable(partTwo, equation))
 				{
 					sum += equation[0];
 				}
@@ -40,21 +40,34 @@
 			return sum;
 		}
 
-		private bool IsSolvable(List<double> equation,  int index=1, double operationsValue=0)
+		private bool IsSolvable(bool partTwo, List<double> equation,  int index=1, double operationsValue=0)
 		{
 			if (index == equation.Count)
 			{
 				return operationsValue == equation[0];
 			}
 
-			if (IsSolvable(equation, index + 1, operationsValue + equation[index]))
+			var number = equation[index];
+
+			if (IsSolvable(partTwo, equation, index + 1, operationsValue + number))
 			{
 				return true;
 			}
 
-			if (IsSolvable(equation, index + 1, operationsValue * equation[index]))
+			if (IsSolvable(partTwo, equation, index + 1, operationsValue * number))
 			{
 				return true;
+			}
+
+			//Part 2
+			if (partTwo)
+			{
+				var concatenatedNumber = double.Parse($"{operationsValue}{number}");
+
+				if (IsSolvable(partTwo, equation, index + 1, concatenatedNumber))
+				{
+					return true;
+				}
 			}
 
 			return false;
