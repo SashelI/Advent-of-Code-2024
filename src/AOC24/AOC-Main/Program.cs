@@ -6,6 +6,7 @@ using AOC_5;
 using AOC_6;
 using AOC_7;
 using AOC_8;
+using AOC_9;
 
 namespace AOC_Main
 {
@@ -102,7 +103,7 @@ namespace AOC_Main
 			Console.WriteLine($"MIDDLE SUM FOR BAD UPDATES : {badUpdatesSum}");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
-			/*Console.WriteLine("/////////// 06 ///////////");
+			Console.WriteLine("/////////// 06 ///////////");
 
 			start = DateTime.Now;
 			var predictor = new GuardPathPredictor(Path.Combine(ASSETS_DIR, "06-input.txt"));
@@ -139,7 +140,7 @@ namespace AOC_Main
 			timer = (DateTime.Now - start).TotalMilliseconds;
 
 			Console.WriteLine($"SUM OF TEST VALUES THAT CAN BE FOUND : {solvableSum2}");
-			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.WriteLine("/////////// 08 ///////////");
 
@@ -153,6 +154,20 @@ namespace AOC_Main
 			Console.WriteLine("/////////// 08 - 2 ///////////");
 
 			Console.WriteLine($"HARMONICS : {harmonics}\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");
+
+			Console.WriteLine("/////////// 09 ///////////");
+
+			start = DateTime.Now;
+			var diskFragment = new DiskFragment(Path.Combine(ASSETS_DIR, "09-input.txt"));
+			diskFragment.Checksum(out var result1, out var result2);
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"PART 1 : {result1}\r\n");
+
+			Console.WriteLine("/////////// 09 - 2 ///////////");
+
+			Console.WriteLine($"PART 2 : {result2}\r\n");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();
