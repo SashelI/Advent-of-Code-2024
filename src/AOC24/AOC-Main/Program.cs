@@ -1,6 +1,7 @@
 ﻿using AOC_1;
 using AOC_10;
 using AOC_11;
+using AOC_12;
 using AOC_2;
 using AOC_3;
 using AOC_4;
@@ -20,7 +21,7 @@ namespace AOC_Main
 			DateTime start;
 			double timer=0;
 
-			Console.WriteLine("/////////// 01 /////////// \r\n");
+			/*Console.WriteLine("/////////// 01 /////////// \r\n");
 
 			start = DateTime.Now;
 			var locations1 = new LocationsList(Path.Combine(ASSETS_DIR, "01-input.txt"), 0);
@@ -198,6 +199,20 @@ namespace AOC_Main
 			Console.WriteLine("/////////// 11 - 2 ///////////");
 
 			Console.WriteLine($"PART 2 : {cailloux2}\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
+
+			Console.WriteLine("/////////// 12 ///////////");
+
+			start = DateTime.Now;
+			var garden = new PlantsMap(Path.Combine(ASSETS_DIR, "12-input.txt"));
+			garden.CalculateFences(out var price1);
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"PART 1 : {price1}\r\n");
+
+			Console.WriteLine("/////////// 12 - 2 ///////////");
+
+			//Console.WriteLine($"PART 2 : {cailloux2}\r\n");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();
