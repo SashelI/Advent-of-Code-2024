@@ -20,9 +20,11 @@ namespace AOC_12
 			_bounds = new(_map.Count - 1, borderRow.Length - 1);
 		}
 
-		public void CalculateFences(out int price1)
+		public void CalculateFences(out int price1, out int price2)
 		{
 			price1 = 0;
+			price2 = 0;
+
 			_visitedPlants = new HashSet<(int, int)>();
 
 			for (var j = 1; j < _bounds.X; ++j)
@@ -34,18 +36,20 @@ namespace AOC_12
 						continue;
 					}
 
-					var areaAndPerimeter = CalculateRegion(i, j, _map[j][i]);
+					_corners = new HashSet<(int, int, char)>();
+					var areaPerimeterAndCorners= CalculateRegion(i, j, _map[j][i]);
 
-					price1 += (int)(areaAndPerimeter.X * areaAndPerimeter.Y);
+					price1 += (int)(areaPerimeterAndCorners.X * areaPerimeterAndCorners.Y);
+					price2 += (int)(areaPerimeterAndCorners.X * areaPerimeterAndCorners.Z);
 				}
 			}
 		}
 
-		private Vector2 CalculateRegion(int x, int y, char crop)
+		private Vector3 CalculateRegion(int x, int y, char crop)
 		{
 			if (_visitedPlants.Contains((x, y)))
 			{
-				return Vector2.Zero;
+				return new Vector3(0, 0, _corners.Count);
 			}
 
 			var area = 1;
@@ -62,6 +66,21 @@ namespace AOC_12
 			else
 			{
 				perimeter++;
+
+				if (_map[y - 1][x] != crop)
+				{
+					_corners.Add((x - 1, y - 1, '3'));
+				}
+
+				if (_map[y - 1][x - 1] == crop && _map[y - 1][x] == crop)
+				{
+					_corners.Add((x - 1, y, '9'));
+				}
+
+				if (_map[y + 1][x - 1] == crop && _map[y + 1][x] == crop)
+				{
+					_corners.Add((x - 1, y, '3'));
+				}
 			}
 
 			if (_map[y][x + 1] == crop)
@@ -73,6 +92,21 @@ namespace AOC_12
 			else
 			{
 				perimeter++;
+
+				if (_map[y + 1][x] != crop)
+				{
+					_corners.Add((x + 1, y + 1, '7'));
+				}
+
+				if (_map[y - 1][x + 1] == crop && _map[y - 1][x] == crop)
+				{
+					_corners.Add((x + 1, y, '7'));
+				}
+
+				if (_map[y + 1][x + 1] == crop && _map[y + 1][x] == crop)
+				{
+					_corners.Add((x + 1, y, '1'));
+				}
 			}
 
 			if (_map[y - 1][x] == crop)
@@ -84,6 +118,21 @@ namespace AOC_12
 			else
 			{
 				perimeter++;
+
+				if (_map[y][x + 1] != crop)
+				{
+					_corners.Add((x + 1, y - 1, '1'));
+				}
+
+				if (_map[y - 1][x - 1] == crop && _map[y][x - 1] == crop)
+				{
+					_corners.Add((x, y - 1, '1'));
+				}
+
+				if (_map[y - 1][x + 1] == crop && _map[y][x + 1] == crop)
+				{
+					_corners.Add((x, y - 1, '3'));
+				}
 			}
 
 			if (_map[y + 1][x] == crop)
@@ -95,9 +144,24 @@ namespace AOC_12
 			else
 			{
 				perimeter++;
+
+				if (_map[y][x - 1] != crop)
+				{
+					_corners.Add((x - 1, y + 1, '9'));
+				}
+
+				if (_map[y + 1][x - 1] == crop && _map[y][x - 1] == crop)
+				{
+					_corners.Add((x, y + 1, '7'));
+				}
+
+				if (_map[y + 1][x + 1] == crop && _map[y][x + 1] == crop)
+				{
+					_corners.Add((x, y + 1, '9'));
+				}
 			}
 
-			return new(area, perimeter);
+			return new(area, perimeter, _corners.Count);
 		}
 	}
 }
