@@ -1,4 +1,5 @@
 ﻿using AOC_1;
+using AOC_10;
 using AOC_2;
 using AOC_3;
 using AOC_4;
@@ -18,7 +19,7 @@ namespace AOC_Main
 			DateTime start;
 			double timer=0;
 
-			Console.WriteLine("/////////// 01 /////////// \r\n");
+			/*Console.WriteLine("/////////// 01 /////////// \r\n");
 
 			start = DateTime.Now;
 			var locations1 = new LocationsList(Path.Combine(ASSETS_DIR, "01-input.txt"), 0);
@@ -168,6 +169,20 @@ namespace AOC_Main
 			Console.WriteLine("/////////// 09 - 2 ///////////");
 
 			Console.WriteLine($"PART 2 : {result2}\r\n");
+			Console.WriteLine($"Time : {timer} ms" + "\r\n");*/
+
+			Console.WriteLine("/////////// 10 ///////////");
+
+			start = DateTime.Now;
+			var topo = new TopographicMap(Path.Combine(ASSETS_DIR, "10-input.txt"));
+			topo.CountScores(out var part1, out var part2);
+			timer = (DateTime.Now - start).TotalMilliseconds;
+
+			Console.WriteLine($"PART 1 : {part1}\r\n");
+
+			Console.WriteLine("/////////// 10 - 2 ///////////");
+
+			Console.WriteLine($"PART 2 : {part2}\r\n");
 			Console.WriteLine($"Time : {timer} ms" + "\r\n");
 
 			Console.Read();
