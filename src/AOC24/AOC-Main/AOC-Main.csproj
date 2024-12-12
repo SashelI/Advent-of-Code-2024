@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AntinodesMap\AOC-8.csproj" />
     <ProjectReference Include="..\AOC-10\AOC-10.csproj" />
+    <ProjectReference Include="..\AOC-11\AOC-11.csproj" />
     <ProjectReference Include="..\AOC-1\AOC-1.csproj" />
     <ProjectReference Include="..\AOC-2\AOC-2.csproj" />
     <ProjectReference Include="..\AOC-3\AOC-3.csproj" />
